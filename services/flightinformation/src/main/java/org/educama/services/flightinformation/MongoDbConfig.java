@@ -19,6 +19,7 @@ import com.mongodb.ServerAddress;
 
 @Configuration
 public class MongoDbConfig {
+	private String someValue;
 
 	@Bean
 	public MongoClient client(@Value("classpath:myTrustStore") Resource trustStore,
@@ -32,7 +33,7 @@ public class MongoDbConfig {
 		Files.copy(trustStore.getInputStream(), tempDirPath, StandardCopyOption.REPLACE_EXISTING);
 
 		System.setProperty("javax.net.ssl.trustStore", tempDirPath.toString());
-		
+
 		ServerAddress serverAddress = new ServerAddress(url, port);
 		List<MongoCredential> mongoCredentials = Arrays.asList(MongoCredential.createCredential(userName, database, password.toCharArray()));
 		MongoClientOptions mongoClientOptions = MongoClientOptions.builder()
