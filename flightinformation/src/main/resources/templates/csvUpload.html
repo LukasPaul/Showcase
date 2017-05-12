@@ -12,16 +12,13 @@
 </style>
 <body>
 
-	<div th:if="${message}">
-		<h2 th:text="${message}"/>
-		<h2>Upload Airports Data</h2>
-		this is a little snippet for uploading csv file to the flightinfo service<br>
-		The csv is posted as multipart form data to:<i> http://localhost:8080/airport/import/csv</i>
-		
-	</div>
+	<h2>Upload Airports Data</h2>
+	This is a little snippet for uploading csv file to the flightinfo service <br />
+	The csv is posted as multipart data form to:<i> /airports/import/csv</i>
+
 
 	<div class="chart">
-		<form method="POST" enctype="multipart/form-data" action="http://localhost:8080/airport/import/csv">
+		<form method="POST" enctype="multipart/form-data" action="airports/import/csv">
 			<table>
 			<tr>Please select the csv file</tr>
 				<tr><td><input type="file" name="file" /></td></tr>
