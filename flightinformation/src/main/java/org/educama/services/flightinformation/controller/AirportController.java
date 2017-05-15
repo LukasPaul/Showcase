@@ -35,7 +35,7 @@ public class AirportController {
      * @param iataCode the IATA Code
      * @return the airport.
      */
-    @RequestMapping("/airports/{iata}")
+    @RequestMapping("/airports/{iataCode}")
     public List<Airport> getAirportByIataCode(@PathVariable String iataCode) {
         return airportBusinessService.findAirportByIataCode(iataCode.toUpperCase());
     }
@@ -43,7 +43,7 @@ public class AirportController {
     /**
      * Retrieves the a list of airports which IATA code begin with a given term.
      *
-     * @param term the part of the IATA code to be looked up.
+     * @param iataCode the part of the IATA code to be looked up.
      * @return the list of matching airports.
      */
     @RequestMapping("/airports/suggestions")
@@ -61,7 +61,7 @@ public class AirportController {
      */
     @RequestMapping(value = "/airports/import/csv", method = RequestMethod.POST)
     public @ResponseBody
-    void importAirport(@RequestParam("file") MultipartFile file) throws IOException {
+    void importAirports(@RequestParam("file") MultipartFile file) throws IOException {
     	airportBusinessService.clearAndImportAirports(file);
     }
 }
