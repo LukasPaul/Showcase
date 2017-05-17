@@ -26,10 +26,7 @@ public class AirportUnitTest {
             .withLatitude(0)
             .withLongitude(2);
 
-    @Before
-    public void setup() {
 
-    }
 
     @Test
     public void equals_returnsTrue_whenSameIataCode_irrespectiveOfCase() {
@@ -45,7 +42,7 @@ public class AirportUnitTest {
     }
 
     @Test
-    public void iataCode_isAlwaysConvertedToUppercae() {
+    public void iataCode_isAlwaysConvertedToUppercase() {
         //Given
         Airport firstAirport = new Airport();
         Airport secondAirport;

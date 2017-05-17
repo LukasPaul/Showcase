@@ -25,7 +25,7 @@ import java.util.List;
  * Created by GMA on 08.05.2017.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AirportBusinessServiceUnitTest extends AirportController {
+public class AirportBusinessServiceUnitTest {
 	@Mock
 	AirportRepository airportRepository;
 	@Mock

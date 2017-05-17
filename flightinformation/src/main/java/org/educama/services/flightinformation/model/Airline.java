@@ -51,7 +51,7 @@ public class Airline {
     }
 
     public void setCallSign(String callSign) {
-        this.callSign = callSign;
+        this.callSign = callSign!=null?callSign.toUpperCase():callSign;
     }
 
     public String getCountry() {
@@ -83,7 +83,7 @@ public class Airline {
     }
 
     public Airline withCallSign(String callSign) {
-        this.callSign = callSign;
+      this.setCallSign(callSign);
         return this;
     }
 
