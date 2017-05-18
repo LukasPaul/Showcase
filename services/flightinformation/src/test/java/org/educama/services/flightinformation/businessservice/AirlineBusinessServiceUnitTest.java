@@ -1,6 +1,14 @@
 package org.educama.services.flightinformation.businessservice;
 
-import org.educama.services.flightinformation.controller.AirlineController;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.educama.services.flightinformation.datafeed.AirlineCsvDeserializer;
 import org.educama.services.flightinformation.model.Airline;
 import org.educama.services.flightinformation.repository.AirlineRepository;
@@ -11,41 +19,37 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-
 @RunWith(MockitoJUnitRunner.class)
 public class AirlineBusinessServiceUnitTest {
+
 	@Mock
 	AirlineRepository airlineRepository;
+
 	@Mock
 	MultipartFile file;
+
 	@Mock
 	InputStream inputStream;
+
 	@Mock
 	AirlineCsvDeserializer airlineCsvDeserializer;
+
 	@Mock
 	List<Airline> airlines;
-	
+
 	@InjectMocks
 	private AirlineBusinessService cut;
 
 	private final String iataLowerCase = "ana";
+
 	private final String iataUpperCase = "ANA";
 
 	@Test
 	public void findAirlinesByIataCode_retrievesAirlines_irrespectiveOfTheCaseOfIATA() {
-		
+
 		// When
 		cut.findAirlinesByIataCode(iataLowerCase);
-		
+
 		// Then
 		verify(airlineRepository).findByIataCode(iataUpperCase);
 	}
@@ -70,6 +74,7 @@ public class AirlineBusinessServiceUnitTest {
 		// Then
 		assertThat(suggestions).isEmpty();
 	}
+
 	@Test
 	public void findAirlinesSuggestionsByCallsign_returnsAnEmptyList_whenNoTermSpecified() {
 		// When
@@ -100,6 +105,7 @@ public class AirlineBusinessServiceUnitTest {
 		// Then
 		assertThat(suggestions.size()).isEqualTo(AirportBusinessService.maxSuggestions);
 	}
+
 	@Test
 	public void findAirlinesSuggestionsByCallSign_truncatesTheResultSet_whenMoreThanMaximumFound() {
 		// Given
@@ -135,10 +141,10 @@ public class AirlineBusinessServiceUnitTest {
 
 	@Test
 	public void findAllAirlines_returnsAllAirlines() {
-		
+
 		// When
 		cut.findAllAirlines();
-		
+
 		// Then
 		verify(airlineRepository).findAll();
 	}

@@ -1,70 +1,67 @@
 package org.educama.services.flightinformation.businessservice;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.educama.services.flightinformation.datafeed.AirlineCsvDeserializer;
-import org.educama.services.flightinformation.datafeed.AirportCsvDeserializer;
 import org.educama.services.flightinformation.model.Airline;
-import org.educama.services.flightinformation.model.Airport;
 import org.educama.services.flightinformation.repository.AirlineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
-
 @Component
 public class AirlineBusinessService {
-    @Autowired
-    private AirlineRepository airlineRepository;
-    @Autowired
-    private AirlineCsvDeserializer airlineCsvDeserializer;
 
+	@Autowired
+	private AirlineRepository airlineRepository;
 
-    protected static int maxSuggestions = 10;
+	@Autowired
+	private AirlineCsvDeserializer airlineCsvDeserializer;
 
-    public List<Airline> findAllAirlines() {
-        return airlineRepository.findAll();
-    }
+	protected static int maxSuggestions = 10;
 
-    public List<Airline> findAirlinesByIataCode(String iataCode) {
-        return airlineRepository.findByIataCode(iataCode.toUpperCase());
-    }
+	public List<Airline> findAllAirlines() {
+		return airlineRepository.findAll();
+	}
 
-    public List<Airline> findAirlinesSuggestionsByIataCode(String iataCode) {
-        if (StringUtils.isEmpty(iataCode)) {
-            return Collections.emptyList();
-        }
+	public List<Airline> findAirlinesByIataCode(String iataCode) {
+		return airlineRepository.findByIataCode(iataCode.toUpperCase());
+	}
 
-        List<Airline> suggestions = airlineRepository.findByIataCodeLike(iataCode.toUpperCase());
+	public List<Airline> findAirlinesSuggestionsByIataCode(String iataCode) {
+		if (StringUtils.isEmpty(iataCode)) {
+			return Collections.emptyList();
+		}
 
-        return suggestions.stream()
-                .limit(maxSuggestions)
-                .collect(Collectors.toList());
-    }
+		List<Airline> suggestions = airlineRepository.findByIataCodeLike(iataCode.toUpperCase());
 
-    public List<Airline> findAirlinesSuggestionsByCallSign(String callSign) {
-        if (StringUtils.isEmpty(callSign)) {
-            return Collections.emptyList();
-        }
+		return suggestions.stream()
+		    .limit(maxSuggestions)
+		    .collect(Collectors.toList());
+	}
 
-        List<Airline> suggestions = airlineRepository.findByCallSignLike(callSign.toUpperCase());
+	public List<Airline> findAirlinesSuggestionsByCallSign(String callSign) {
+		if (StringUtils.isEmpty(callSign)) {
+			return Collections.emptyList();
+		}
 
-        return suggestions.stream()
-                .limit(maxSuggestions)
-                .collect(Collectors.toList());
-    }
+		List<Airline> suggestions = airlineRepository.findByCallSignLike(callSign.toUpperCase());
 
-    public void clearAndImportAirlines(MultipartFile file) throws IOException {
-        List<Airline> airlines = airlineCsvDeserializer.deserialize(file.getInputStream());
+		return suggestions.stream()
+		    .limit(maxSuggestions)
+		    .collect(Collectors.toList());
+	}
 
-        airlineRepository.deleteAll();
-        airlineRepository.save(airlines);
+	public void clearAndImportAirlines(MultipartFile file) throws IOException {
+		List<Airline> airlines = airlineCsvDeserializer.deserialize(file.getInputStream());
 
-    }
+		airlineRepository.deleteAll();
+		airlineRepository.save(airlines);
 
+	}
 
 }

@@ -5,9 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-/**
- * Created by GMA on 15.05.2017.
- */
 public interface AirlineRepository extends MongoRepository<Airline, String> {
     public Airline findByName(String name);
 

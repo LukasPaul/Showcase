@@ -1,54 +1,55 @@
 package org.educama.services.flightinformation.businessservice;
 
-import static org.mockito.Mockito.verify;
-
-import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import org.educama.services.flightinformation.controller.AirportController;
-import org.educama.services.flightinformation.datafeed.AirportCsvDeserializer;
-import org.educama.services.flightinformation.model.Airport;
-import org.educama.services.flightinformation.repository.AirportRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.InjectMocks;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.web.multipart.MultipartFile;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by GMA on 08.05.2017.
- */
+import org.educama.services.flightinformation.datafeed.AirportCsvDeserializer;
+import org.educama.services.flightinformation.model.Airport;
+import org.educama.services.flightinformation.repository.AirportRepository;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.web.multipart.MultipartFile;
+
 @RunWith(MockitoJUnitRunner.class)
 public class AirportBusinessServiceUnitTest {
+
 	@Mock
 	AirportRepository airportRepository;
+
 	@Mock
 	MultipartFile file;
+
 	@Mock
 	InputStream inputStream;
+
 	@Mock
 	AirportCsvDeserializer airportCsvDeserializer;
+
 	@Mock
 	List<Airport> airportList;
-	
+
 	@InjectMocks
 	private AirportBusinessService cut;
 
 	private final String iataLowerCase = "ybb";
+
 	private final String iataUpperCase = "YBB";
 
 	@Test
 	public void getAirport_retrievesAirport_irrespectiveOfTheCaseOfIATA() {
-		
+
 		// When
 		cut.findAirportByIataCode(iataLowerCase);
-		
+
 		// Then
 		verify(airportRepository).findByIataCode(iataUpperCase);
 	}
@@ -109,10 +110,10 @@ public class AirportBusinessServiceUnitTest {
 
 	@Test
 	public void getAllAirports_returnsAllAirports() {
-		
+
 		// When
 		cut.findAllAirports();
-		
+
 		// Then
 		verify(airportRepository).findAll();
 	}

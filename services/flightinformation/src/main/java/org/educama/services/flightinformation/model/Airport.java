@@ -4,143 +4,149 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 
 public class Airport {
-    @Id
-    private String id;
-    private String name;
-    private String city;
-    private String country;
-    private String iataCode;
-    private String icaoCode;
-    private double latitude;
-    private double longitude;
 
+	@Id
+	private String id;
 
-    public Airport() {
-    }
+	private String name;
 
-    public Airport(String name, String iataCode) {
-        this.name = name;
-        this.iataCode = iataCode;
-    }
+	private String city;
 
-    public String getId() {
-        return id;
-    }
+	private String country;
 
+	private String iataCode;
 
-    public String getName() {
-        return name;
-    }
+	private String icaoCode;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	private double latitude;
 
-    public String getCity() {
-        return city;
-    }
+	private double longitude;
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public Airport() {
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	public Airport(String name, String iataCode) {
+		this.name = name;
+		this.iataCode = iataCode;
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getIataCode() {
-        return iataCode;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setIataCode(String iataCode) {
-        this.iataCode = iataCode != null ? iataCode.toUpperCase() : iataCode;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getIcaoCode() {
-        return icaoCode.toUpperCase();
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public void setIcaoCode(String icaoCode) {
-        this.icaoCode = icaoCode != null ? icaoCode.toUpperCase() : icaoCode;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public double getLatitude() {
-        return latitude;
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
-    public double getLongitude() {
-        return longitude;
-    }
+	public String getIataCode() {
+		return iataCode;
+	}
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+	public void setIataCode(String iataCode) {
+		this.iataCode = iataCode != null ? iataCode.toUpperCase() : iataCode;
+	}
 
-    public Airport withName(String name) {
-        this.name = name;
-        return this;
-    }
+	public String getIcaoCode() {
+		return icaoCode.toUpperCase();
+	}
 
-    public Airport withCity(String city) {
-        this.city = city;
-        return this;
-    }
+	public void setIcaoCode(String icaoCode) {
+		this.icaoCode = icaoCode != null ? icaoCode.toUpperCase() : icaoCode;
+	}
 
-    public Airport withCountry(String country) {
-        this.country = country;
-        return this;
-    }
+	public double getLatitude() {
+		return latitude;
+	}
 
-    public Airport withIataCode(String iataCode) {
-        setIataCode(iataCode);
-        return this;
-    }
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
-    public Airport withIcaoCode(String icaoCode) {
-        setIcaoCode(icaoCode);
-        return this;
-    }
+	public double getLongitude() {
+		return longitude;
+	}
 
-    public Airport withLatitude(double latitude) {
-        this.latitude = latitude;
-        return this;
-    }
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 
-    public Airport withLongitude(double longitude) {
-        this.longitude = longitude;
-        return this;
-    }
+	public Airport withName(String name) {
+		this.name = name;
+		return this;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Airport)) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
-        }
-        Airport airport = (Airport) obj;
-        return this.iataCode.equalsIgnoreCase(((Airport) obj).iataCode);
-    }
+	public Airport withCity(String city) {
+		this.city = city;
+		return this;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 1).append(iataCode.toUpperCase())
-                .toHashCode();
+	public Airport withCountry(String country) {
+		this.country = country;
+		return this;
+	}
 
-    }
+	public Airport withIataCode(String iataCode) {
+		setIataCode(iataCode);
+		return this;
+	}
 
-    @Override
-    public String toString() {
-        return String.format("Airport[id=%s, name='%s', IATA='%s']", id, name, iataCode);
-    }
+	public Airport withIcaoCode(String icaoCode) {
+		setIcaoCode(icaoCode);
+		return this;
+	}
+
+	public Airport withLatitude(double latitude) {
+		this.latitude = latitude;
+		return this;
+	}
+
+	public Airport withLongitude(double longitude) {
+		this.longitude = longitude;
+		return this;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Airport)) {
+			return false;
+		}
+		if (obj == this) {
+			return true;
+		}
+		Airport airport = (Airport) obj;
+		return this.iataCode.equalsIgnoreCase(((Airport) obj).iataCode);
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 1).append(iataCode.toUpperCase())
+		    .toHashCode();
+
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Airport[id=%s, name='%s', IATA='%s']", id, name, iataCode);
+	}
 
 }
