@@ -6,4 +6,4 @@ applications:
   memory: 512M
   disk_quota: 256M
   services:
-    - Educama-ext-Mongo
+    - Educama_AtlasMongoDB

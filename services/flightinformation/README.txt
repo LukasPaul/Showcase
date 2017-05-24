@@ -15,3 +15,10 @@ The UI is locally accessed via the following URL: http://localhost:8080/csvUploa
 ## Running the application on Cloud Foundry
 When running on Cloud Foundry the application is bound to Mongo DB service specified in the manifest.yml
 the upload interface is reached by replacing the localhost by the corresponding host.
+
+
+## Create User Provided Service
+For connecting against the Atlas MongoDB, create an User Provided Service(if not happend). 
+First complete the File UserProvidedService.json (The Credentials can be found in Confluence under the Flight Service)
+Then create the User Provided Service with 
+						cf cups Educama_AtlasMongoDB -p UserProvidedService.json
