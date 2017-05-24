@@ -5,5 +5,5 @@ applications:
   buildpack: https://github.com/cloudfoundry/java-buildpack.git#v3.10
   memory: 512M
   disk_quota: 256M
-#  services:
-#    - Educama-MongoDB
+  services:
+    - Educama-ext-Mongo
